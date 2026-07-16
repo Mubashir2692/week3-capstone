@@ -82,3 +82,11 @@ and Nginx (reverse proxy).
 - Redis 7
 - Nginx (alpine)
 - Docker Compose
+
+## Bonus Features
+
+- **Prometheus metrics**: exposed at `GET /metrics`, tracking total requests
+  and request latency per endpoint (`app_requests_total`, `app_request_latency_seconds`).
+- **CI/CD pipeline**: GitHub Actions automatically builds and pushes the Docker
+  image to Docker Hub on every push to `main`.
+  Image: [`mubashir2692/week3-capstone-app`](https://hub.docker.com/r/mubashir2692/week3-capstone-app)
