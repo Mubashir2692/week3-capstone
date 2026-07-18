@@ -1,4 +1,11 @@
-__pycache__/
-*.pyc
-.env
+# Environment variables
+*.env
+
+# Logs
 *.log
+
+# Dependency folders
+node_modules/
+
+# OS files
+.DS_Store
