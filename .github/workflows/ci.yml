@@ -32,7 +32,7 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            sudo docker pull mubashir2692/week3-capstone-app:latest
-            sudo docker stop week3-app || true
-            sudo docker rm week3-app || true
-            sudo docker run -d --name week3-app -p 80:5000 mubashir2692/week3-capstone-app:latest
+            cd ~/week3-capstone
+            git pull origin main
+            sudo docker compose pull
+            sudo docker compose up -d
