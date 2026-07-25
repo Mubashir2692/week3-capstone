@@ -90,3 +90,4 @@ and Nginx (reverse proxy).
 - **CI/CD pipeline**: GitHub Actions automatically builds and pushes the Docker
   image to Docker Hub on every push to `main`.
   Image: [`mubashir2692/week3-capstone-app`](https://hub.docker.com/r/mubashir2692/week3-capstone-app)
+# CI/CD verified Sat Jul 25 15:11:56 PKT 2026
