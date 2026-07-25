@@ -1,27 +1,38 @@
 name: Build and Push Docker Image
-
 on:
   push:
     branches:
       - main
-
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
       - name: Build and push image
         uses: docker/build-push-action@v6
         with:
           context: ./app
           push: true
           tags: mubashir2692/week3-capstone-app:latest
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ubuntu
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            sudo docker pull mubashir2692/week3-capstone-app:latest
+            sudo docker stop week3-app || true
+            sudo docker rm week3-app || true
+            sudo docker run -d --name week3-app -p 80:5000 mubashir2692/week3-capstone-app:latest
